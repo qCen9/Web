@@ -1,0 +1,47 @@
+﻿@model CartListViewModel
+
+<nav id="nav">
+    <ul>
+        <li><a href="/Home/Index">Home</a></li>
+        <li>
+            <a href="/Books/List">Товары</a>
+            <ul>
+                <li><a href="/Books/List/Fiction">Художественная литература</a></li>
+                <li><a href="/Books/List/Technical_lit">Техническая литература</a></li>
+                <li><a href="/Books/List/History">История</a></li>
+                <li><a href="/Books/List/Fantastic">Фантастика</a></li>
+            </ul>
+        </li>
+        <li><a href="/Cart/Index">Корзина</a></li>
+    </ul>
+</nav>
+
+<div class="container-xxl">
+    <div class="row m-5 p-5">
+        <div class="form-group">
+            <header>
+                @foreach (var el in Model.Cart.ListCartItems)
+                {
+                    <div class="text-center">
+                        Книга:  @el.Book.BookName<br />
+                        Цена: @el.Book.Price.ToString("# руб")<br />
+                        <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@el.ID">
+                            Удалить
+                        </a>
+                    </div>
+                }
+            </header>
+        </div>
+
+        <div class="text-center">
+            <div class="form-group">
+                Общая сумма: @Model.SumCartItem руб<br />
+            </div>
+            <div class="row">
+                <div class="col m-1">
+                    <a class="btn btn-primary" asp-controller="Order" asp-action="CheckOut">Оплатить</a>
+                </div>
+            </div>
+        </div>
+</div>
+</div>

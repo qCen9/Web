@@ -1,0 +1,32 @@
+﻿
+<nav id="nav">
+    <ul>
+        <li><a href="/Home/Index">Home</a></li>
+        <li>
+            <a href="/Books/List">
+                Товары
+            </a>
+        </li>
+        <li><a href="/Cart/Index">Корзина</a></li>
+    </ul>
+</nav>
+<div class="container-xxl">
+    <div class="row m-4 p-1">
+        <div class="col-3">
+            <div class="list-group">
+                @{ foreach (Category category in Model.AllCategory)
+                   {
+                    <a class="list-group-item list-group-item-info"
+                       asp-controller="Books" asp-action="BooksPartial" asp-route-category="@category.CategoryName"
+                       data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results" method="get">
+                        @category.CategoryName
+                    </a> 
+                    } 
+                 }
+            </div>
+        </div>
+
+        <div class="col-9" id="results"></div>
+
+    </div>
+</div>
